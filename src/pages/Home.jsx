@@ -1,6 +1,4 @@
-import Header from "../components/Header";
-import Description from "../components/Description";
-import JoinButton from "../components/JoinButton";
+
 import Lightning from "../ui/Lightning/Lightning";
 import Layout from "../layout/Layout";
 

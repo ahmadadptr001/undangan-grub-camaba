@@ -1,4 +1,6 @@
-
+import Header from "../components/Header";
+import Description from "../components/Description";
+import JoinButton from "../components/JoinButton";
 
 export default function Layout() {
     return (
