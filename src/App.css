@@ -1,3 +1,55 @@
-html, body {
-  font-family: 'Poppins', sans-serif;
+html,
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.hujan-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.hujan-container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 2px);
+    animation: turunHujan 0.5s linear infinite;
+    z-index: 1;
+}
+
+@keyframes turunHujan {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+.petir {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0.8;
+    z-index: 999999;
+    animation: kilat 0.2s ease-in-out;
+}
+
+@keyframes kilat {
+    0% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0;
+    }
 }
