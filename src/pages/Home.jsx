@@ -8,7 +8,9 @@ const Home = () => {
     return (
         <>
             <div className="fixed w-full h-full -z-1 inset-0">
-                <audio src={hymneTeknikSong} autoPlay loop></audio>
+                <audio autoPlay loop>
+                    <source src={hymneTeknikSong}/>
+                </audio>
                     <Lightning hue={331} xOffset={0.8} speed={1} intensity={1} size={1} />
             </div>
             <Layout />
