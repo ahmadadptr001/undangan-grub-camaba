@@ -5,33 +5,52 @@ const Hujan = () => {
     const audioRef = useRef(null);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            // munculkan petir
-            const petir = document.createElement("div");
-            petir.className = "petir";
-            document.body.appendChild(petir);
+        // Putar suara petir saat pertama kali load
+        if (audioRef.current) {
+            audioRef.current.play().catch(() => {
+                console.warn("Audio autoplay dicegah oleh browser.");
+            });
+        }
 
-            // mainkan suara kilat
+        // Efek petir + suara petir acak
+        const interval = setInterval(() => {
+            const flash = document.createElement("div");
+            flash.className = "petir";
+            document.body.appendChild(flash);
+
             if (audioRef.current) {
-                audioRef.current.currentTime = 0; // mulai dari awal
-                audioRef.current.play().catch(err => {
-                    console.warn("Browser menolak autoplay suara: ", err);
-                });
+                audioRef.current.currentTime = 0;
+                audioRef.current.play().catch(() => {});
             }
 
-            // hilangkan petir
             setTimeout(() => {
-                document.body.removeChild(petir);
-            }, 200);
-        }, Math.random() * 7000 + 3000); // tiap 3-10 detik
+                document.body.removeChild(flash);
+            }, 150);
+        }, Math.random() * 7000 + 5000); // setiap 5–12 detik
 
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="hujan-serem fixed w-full h-full top-0 left-0 z-[9999] pointer-events-none overflow-hidden">
-            <div className="hujan-container" />
+        <div className="hujan-container">
             <audio ref={audioRef} src={kilatSound} preload="auto" />
+            {[...Array(150)].map((_, i) => {
+                const x = Math.random(); // posisi horizontal 0–1
+                const speed = Math.random(); // kecepatan
+                return (
+                    <span
+                        key={i}
+                        className="rain-drop"
+                        style={{
+                            "--x": x,
+                            "--speed": speed,
+                            left: `${x * 100}vw`,
+                            animationDuration: `${0.5 + speed * 1.5}s`,
+                            animationDelay: `${Math.random()}s`,
+                        }}
+                    ></span>
+                );
+            })}
         </div>
     );
 };
